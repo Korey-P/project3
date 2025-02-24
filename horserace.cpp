@@ -4,25 +4,22 @@
 
 using namespace std;
 
-const int TRACK_LENGTH = 15;  // Length of the race track
-const int NUM_HORSES = 5;     // Number of horses
+const int TRACK_LENGTH = 15;
+const int NUM_HORSES = 5;
 
-// Move horses based on a coin flip
 void advance(int horses[]) {
     for (int i = 0; i < NUM_HORSES; i++) {
-        int coin = rand() % 2;  // Flip a coin (0 or 1)
-        if (coin == 1) {
-            horses[i]++;  // Move horse forward if 1
+        if (rand() % 2 == 1) {
+            horses[i]++;
         }
     }
 }
 
-// Print the current race track
 void printRace(int horses[]) {
     for (int i = 0; i < NUM_HORSES; i++) {
         for (int j = 0; j < TRACK_LENGTH; j++) {
             if (j == horses[i]) {
-                cout << i;  // Display horse number at position
+                cout << i;
             } else {
                 cout << ".";
             }
@@ -31,7 +28,6 @@ void printRace(int horses[]) {
     }
 }
 
-// Check if any horse has won
 bool checkWinner(int horses[]) {
     for (int i = 0; i < NUM_HORSES; i++) {
         if (horses[i] >= TRACK_LENGTH - 1) {
@@ -43,22 +39,24 @@ bool checkWinner(int horses[]) {
 }
 
 int main() {
-    srand(time(0));  // Random number generator
-    int horses[NUM_HORSES] = {0};  // horse positions
+    srand(time(0));
+    int horses[NUM_HORSES] = {0};
     bool raceOver = false;
 
-    cin.get();  
+    cout << "Press Enter to start the race...";
+    cin.get();
 
     while (!raceOver) {
-        system("clear");  
+        system("clear");
 
-        advance(horses);   // Move horse based on flip
-        printRace(horses); // Display race track
+        advance(horses);
+        printRace(horses);
 
-        raceOver = checkWinner(horses);  // Check if horse won
+        raceOver = checkWinner(horses);
 
         if (!raceOver) {
-            cin.get(); 
+            cout << "Press Enter for the next turn...";
+            cin.get();
         }
     }
 
